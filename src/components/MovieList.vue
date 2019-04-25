@@ -1,6 +1,18 @@
 <template>
-    <div id="movie-list"> 
-        <movie-item v-bind:movie=movie.movie v-for="movie in filteredMovies" class="movie"></movie-item>
+    <div id="movie-list">
+        <div v-if="filteredMovies.length">
+            <movie-item v-bind:movie="movie.movie" 
+                        v-for="movie in filteredMovies" 
+                        v-bind:sessions="movie.sessions"
+                        class="movie">
+            </movie-item>
+        </div>
+        <div v-else-if="movies.length">
+            No results
+        </div>
+        <div v-else>
+            Loading...
+        </div>
     </div>
 </template>
 
@@ -33,6 +45,6 @@
         },
         components: {
             MovieItem
-        }
+        },
     }
 </script>
