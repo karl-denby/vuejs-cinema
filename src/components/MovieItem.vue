@@ -8,8 +8,8 @@
                 <h2>{{ movie.Title }}</h2>
                 <span class="movie-rating">{{ movie.Rated }}</span>
             </div>
-            <div>
-                <div v-for="session in sessions" class="session-time-wrapper">
+            <div class="movie-sessions">
+                <div v-for="session in filteredSessions(sessions)" class="session-time-wrapper">
                     <div class="session-time">{{ formatSessionTime(session.time) }}</div>
                 </div>
             </div>
@@ -19,8 +19,13 @@
 
 <script>
 export default {
-    props: [ 'movie', 'sessions' ],
+    props: [ 'movie', 'sessions' , 'day'  ],
     methods: {
+        filteredSessions(sessions) {
+            return sessions.filter(session => {
+                return this.$moment(session.time).isSame(this.day, 'day')
+            })
+        },
         formatSessionTime(raw) {
             return this.$moment(raw).format('HH:mm')
         }

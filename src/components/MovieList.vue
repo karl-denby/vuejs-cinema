@@ -4,6 +4,7 @@
             <movie-item v-bind:movie="movie.movie" 
                         v-for="movie in filteredMovies" 
                         v-bind:sessions="movie.sessions"
+                        v-bind:day="day"
                         class="movie">
             </movie-item>
         </div>
@@ -21,7 +22,7 @@
     import MovieItem from './MovieItem.vue'
 
     export default { 
-        props: [ 'movies','genre', 'time'],
+        props: [ 'movies','genre', 'time', 'day' ],
         methods: { 
             moviePassesGenreFilter(movie) {
                 if (!this.genre.length) {
